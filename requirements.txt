@@ -1,6 +1,6 @@
 Pillow==9.2.0  # For handling images
 Flask==2.3.3  # Web framework
-Werkzeug==2.3.3  # For secure password handling
+Werkzeug>=2.3.7  # Required by Flask
 email-validator==1.3.1  # For email validation
 requests==2.31.0  # For HTTP requests
 pyngrok==5.2.2  # For setting up secure tunnels

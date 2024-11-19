@@ -11,7 +11,7 @@ import time
 import uuid
 from pyngrok import ngrok
 
-ngrok.set_auth_token("2nFWTiqIGZn61XCxzwx4iKGOKxp_7p9tAzXtc9WiMacEjjNvi")
+ngrok.set_auth_token("")
 
 # Function to start ngrok
 def start_ngrok():

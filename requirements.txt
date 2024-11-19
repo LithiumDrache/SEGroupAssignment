@@ -1,4 +1,4 @@
-Pillow==9.2.0  # For handling images
+Pillow>=10.0.0  # Latest version with support for Python 3.12
 Flask==2.3.3  # Web framework
 Werkzeug>=2.3.7  # Required by Flask
 email-validator==1.3.1  # For email validation

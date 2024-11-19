@@ -10,6 +10,12 @@ import requests
 import time
 import uuid
 from pyngrok import ngrok
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Get Ngrok auth token
+auth_token = os.getenv("NGROK_TOKEN")
 
 ngrok.set_auth_token("")
 

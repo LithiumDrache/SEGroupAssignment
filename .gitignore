@@ -1,3 +1,9 @@
+# Ignore virtual environment folders
+.venv/
+.env/
+venv/
+env/
+
 # Ignore environment variable files
 .env
 
@@ -5,11 +11,6 @@
 __pycache__/
 *.py[cod]
 *.so
-
-# Ignore virtual environment folders
-venv/
-.env/
-env/
 
 # Ignore Jupyter Notebook checkpoints
 .ipynb_checkpoints/

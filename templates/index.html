@@ -9,8 +9,16 @@
 <body>
     <h1>Enter Your Prompt for the AI</h1>
     <form method="POST" action="/">
-        <label for="user_input">Your Input:</label><br>
+        <label for="user_input">Genre of style:</label><br>
         <input type="text" id="user_input" name="user_input" required><br><br>
+        <label for="gender">Gender:</label><br>
+        <select name="gender" id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        <label for="user_input">Country:</label><br>
+        <input type="text" id="location" name="location" required><br><br>
         <input type="submit" value="Submit">
     </form>
 </body>

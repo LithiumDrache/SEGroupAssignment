@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Survey</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Topbar -->
+    <header>
+        <div class="logo">
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logo.JPG') }}" alt="Fashy Logo"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('survey') }}">Survey</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Survey Page -->
+    <div id="survey-page">
+        <!-- Step 1: Email Input -->
+        <div id="email-step">
+            <h1>Welcome to the Fashion Survey</h1>
+            <p>Please enter your email to begin:</p>
+            <form id="email-form">
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <button type="submit">Start Survey</button>
+            </form>
+            <p id="error-message" style="color: red; display: none;">Please enter a valid email address.</p>
+        </div>
+
+        <!-- Step 2: Age Selection -->
+        <div id="age-step" style="display: none;">
+            <h1>Select Your Age Range</h1>
+            <form id="age-form">
+                <div class="options-grid">
+                    <label><input type="radio" name="age" value="15-20" required> 15-20</label>
+                    <label><input type="radio" name="age" value="21-25"> 21-25</label>
+                    <label><input type="radio" name="age" value="26-30"> 26-30</label>
+                    <label><input type="radio" name="age" value="31-37"> 31-37</label>
+                    <label><input type="radio" name="age" value="38-45"> 38-45</label>
+                    <label><input type="radio" name="age" value="45-60"> 45-60</label>
+                    <label><input type="radio" name="age" value="60+"> 60+</label>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="back-btn" id="back-to-email">Back</button>
+                    <button type="submit" class="next-btn">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 3: Gender Selection -->
+        <div id="gender-step" style="display: none;">
+            <h1>Select Your Gender</h1>
+            <form id="gender-form">
+                <div class="options-row">
+                    <label><input type="radio" name="gender" value="Male" required> Male</label>
+                    <label><input type="radio" name="gender" value="Female"> Female</label>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="back-btn" id="back-to-age">Back</button>
+                    <button type="submit" class="next-btn">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Step 4: Fashion Preferences -->
+        <div id="fashion-step" style="display: none;">
+            <h1>Select Your Preferred Fashion Styles</h1>
+            <form id="fashion-form">
+                <div class="fashion-grid">
+                    <label><input type="checkbox" name="fashion" value="Streetwear"> Streetwear</label>
+                    <label><input type="checkbox" name="fashion" value="Classic"> Classic</label>
+                    <label><input type="checkbox" name="fashion" value="Chic"> Chic</label>
+                    <label><input type="checkbox" name="fashion" value="Athletic"> Athletic</label>
+                    <label><input type="checkbox" name="fashion" value="Vintage"> Vintage</label>
+                    <label><input type="checkbox" name="fashion" value="Glamorous"> Glamorous</label>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="back-btn" id="back-to-gender">Back</button>
+                    <button type="submit" class="next-btn">Next</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Recommendation Step -->
+        <div id="recommendation-step" style="display: none;">
+            <h1>Recommendations</h1>
+            <div id="recommendations"></div>
+            <button class="finish-btn" onclick="window.location.href='{{ url_for('home') }}'">Finish</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    //RANDOM JS
+
+    <!-- document.addEventListener('DOMContentLoaded', () => {
+        const emailStep = document.getElementById('email-step');
+        const ageStep = document.getElementById('age-step');
+        const genderStep = document.getElementById('gender-step');
+        const fashionStep = document.getElementById('fashion-step');
+        const recommendationStep = document.getElementById('recommendation-step');
+        const recommendationsDiv = document.getElementById('recommendations');
+    
+        const emailForm = document.getElementById('email-form');
+        const ageForm = document.getElementById('age-form');
+        const genderForm = document.getElementById('gender-form');
+        const fashionForm = document.getElementById('fashion-form');
+    
+        let surveyData = {};
+    
+        // Recommendation Database
+        const recommendationDatabase = {
+            Male: {
+                Streetwear: {
+                    stores: ["Supreme", "Foot Locker"],
+                    websites: ["Hypebeast", "Urban Outfitters"],
+                },
+                Classic: {
+                    stores: ["Brooks Brothers", "Ralph Lauren"],
+                    websites: ["Banana Republic", "Nordstrom"],
+                },
+                Athletic: {
+                    stores: ["Nike Store", "Adidas Store"],
+                    websites: ["Under Armour", "Lululemon"],
+                },
+            },
+            Female: {
+                Chic: {
+                    stores: ["Zara", "Mango"],
+                    websites: ["Net-A-Porter", "Farfetch"],
+                },
+                Glamorous: {
+                    stores: ["Anthropologie", "Nordstrom"],
+                    websites: ["Revolve", "Chanel"],
+                },
+                Vintage: {
+                    stores: ["Thrift Stores", "Retro City"],
+                    websites: ["Depop", "Etsy"],
+                },
+            },
+        };
+    
+        // Email form submission
+        emailForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.querySelector('#email').value;
+            surveyData.email = email;
+            emailStep.style.display = 'none';
+            ageStep.style.display = 'block';
+        });
+    
+        // Age form submission
+        ageForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const age = document.querySelector('input[name="age"]:checked').value;
+            surveyData.age = age;
+            ageStep.style.display = 'none';
+            genderStep.style.display = 'block';
+        });
+    
+        // Gender form submission
+        genderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            surveyData.gender = gender;
+            genderStep.style.display = 'none';
+            fashionStep.style.display = 'block';
+        });
+    
+        // Fashion form submission
+        fashionForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fashion = Array.from(document.querySelectorAll('input[name="fashion"]:checked')).map(
+                (input) => input.value
+            );
+            surveyData.fashion = fashion;
+            fashionStep.style.display = 'none';
+            showRecommendations();
+        });
+    
+        // Function to display recommendations
+        function showRecommendations() {
+            const gender = surveyData.gender;
+            const styles = surveyData.fashion;
+    
+            let storeRecommendations = [];
+            let websiteRecommendations = [];
+    
+            // Get recommendations for each selected style
+            styles.forEach((style) => {
+                if (recommendationDatabase[gender] && recommendationDatabase[gender][style]) {
+                    storeRecommendations.push(...recommendationDatabase[gender][style].stores);
+                    websiteRecommendations.push(...recommendationDatabase[gender][style].websites);
+                }
+            });
+    
+            // Generate HTML for recommendations
+            recommendationsDiv.innerHTML = `
+                <h2>Recommended Stores:</h2>
+                <ul>${storeRecommendations.map((store) => `<li>${store}</li>`).join('')}</ul>
+                <h2>Recommended Websites:</h2>
+                <ul>${websiteRecommendations
+                    .map((website) => `<li><a href="https://${website.toLowerCase().replace(/ /g, "")}.com" target="_blank">${website}</a></li>`)
+                    .join('')}
+                </ul>
+            `;
+    
+            recommendationStep.style.display = 'block';
+        }
+    
+        // Update "Finish" button with Flask route
+        document.querySelector('.finish-btn').addEventListener('click', () => {
+            window.location.href = "{{ url_for('home') }}";
+        });
+    });
+     -->
+    
+</body>
+</html>

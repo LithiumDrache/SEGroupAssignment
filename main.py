@@ -11,7 +11,7 @@ load_dotenv()
 
 # Retrieve tokens from the .env file
 NGROK_TOKEN = os.getenv("NGROK_TOKEN")
-AI_TOKEN = os.getenv("AI_TOKEN")  # Updated to AI_TOKEN
+AI_TOKEN = os.getenv("AI_TOKEN")
 
 # Check if the tokens are loaded
 if not NGROK_TOKEN:
@@ -34,10 +34,13 @@ INITIAL_URL = "https://api.edenai.run/v2/workflow/bda09f54-49b2-4f5f-a3bc-9b2fa4
 @app.route("/", methods=["GET", "POST"])
 def home():
     if request.method == "POST":
-        user_input = request.form.get("user_input")
-        
+        genre = request.form.get("genre")
+        gender = request.form.get("gender")
+        location = request.form.get("location")
+
         # POST request to start workflow
-        payload = {"user_input": user_input}
+        payload = {"user_input": f"Genre of clothing: {genre}, Gender: {gender}, Location: {location}"}
+
         response = requests.post(INITIAL_URL, json=payload, headers=HEADERS)
 
         if response.status_code == 201:
@@ -69,6 +72,14 @@ def home():
             return render_template("result.html", html_code=f"Error: {response.status_code}, {response.text}")
 
     return render_template("index.html")
+
+@app.route('/about', methods=["GET"])
+def about():
+    return render_template("about.html")
+
+@app.route('/survey', methods=["GET", "POST"])
+def survey():
+    return render_template("survey.html")
 
 # Run Flask app with ngrok
 if __name__ == "__main__":

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Fashy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo.JPG') }}" alt="Fashy Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('survey') }}">Survey</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- About Us Main Content -->
+    <main>
+        <section class="about-banner">
+            <h1>About Us</h1>
+            <p>We believe fashion should be personal, fun, and accessible to everyone.</p>
+        </section>
+
+        <section class="about-details">
+            <h2>Who We Are</h2>
+            <p>
+                We are a service dedicated to discovering your unique fashion needs and preferences. At Fashy, we aim to help you explore styles that match your personality and make fashion shopping effortless and enjoyable.
+            </p>
+        
+            <h2>What We Do</h2>
+            <p>
+                Through our survey-based approach, we learn about your preferences and bring you tailored suggestions to make fashion shopping easier and more enjoyable.
+            </p>
+        
+            <h2>Our Vision</h2>
+            <p>
+                We envision a world where everyone can express themselves confidently through their clothing, regardless of budget or background.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <div>
+                <a href="{{ url_for('about') }}">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Affiliates</a>
+                <a href="#">Resources</a>
+            </div>
+        </div>
+        <p></p>
+    </footer>
+</body>
+</html>

@@ -73,6 +73,14 @@ def home():
 
     return render_template("index.html")
 
+@app.route('/about', methods=["GET"])
+def about():
+    return render_template("about.html")
+
+@app.route('/survey', methods=["GET", "POST"])
+def survey():
+    return render_template("survey.html")
+
 # Run Flask app with ngrok
 if __name__ == "__main__":
     # Set up the Ngrok tunnel

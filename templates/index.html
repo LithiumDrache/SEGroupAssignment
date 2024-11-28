@@ -3,23 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Input</title>
-    <link rel="stylesheet" href="/static/css/stylesheet.css">
+    <title>Fashy - Find Your Style</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Enter Your Prompt for the AI</h1>
-    <form method="POST" action="/">
-        <label for="user_input">Genre of style:</label><br>
-        <input type="text" id="user_input" name="user_input" required><br><br>
-        <label for="gender">Gender:</label><br>
-        <select name="gender" id="gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        <label for="user_input">Country:</label><br>
-        <input type="text" id="location" name="location" required><br><br>
-        <input type="submit" value="Submit">
-    </form>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="{{ url_for('static', filename='images/logo.JPG') }}" alt="Fashy Logo">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('survey') }}">Survey</a></li>                
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <section class="main-banner">
+            <h1>Find Your Style</h1>
+            <p>Discover your new tastes and explore fresh fashion stores tailored for you!</p>
+            <button class="survey-btn">Take Survey</button>
+        </section>
+        
+        <section class="learn-more">
+            <img src="{{ url_for('static', filename='images/glamour.jfif') }}" alt="Glamour Fashion">
+            <div class="text-content">
+                <h2>Learn More About Yourself</h2>
+                <p>
+                    Take our survey to choose the preferences you like. Explore new outfits, discover new styles, and find the best shops tailored to your taste!
+                </p>
+            </div>
+        </section>
+        
+        <section class="learn-more">
+            <img src="{{ url_for('static', filename='images/oxfordst.jpg') }}" alt="Oxford">
+            <div class="text-content">
+                <h2>Find Out New Stores And Brands.</h2>
+                <p>
+                    Find out new stores and brands by taking our survey. Tailored to your finest tastes! 
+                </p>
+            </div>
+        </section>
+
+        <section class="learn-more">
+            <img src="{{ url_for('static', filename='images/chic.jpg') }}" alt="Chic Fashion">
+            <div class="text-content">
+                <h2>Explore your deep fashion sense.</h2>
+                <p>
+                    With so much diversity you can explore different styles which you have never seen before.
+                </p>
+            </div>
+        </section>
+
+        <section class="learn-more">
+            <img src="{{ url_for('static', filename='images/diversity.jfif') }}" alt="Diversity">
+            <div class="text-content">
+                <h2>We cater to diverse people and diverse genders.</h2>
+                <p>
+                    You will not be excluded from our selection.
+                </p>
+            </div>
+          
+            <a href="survey.html" class="survey-btn-large">Take Our Survey</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <div>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Affiliates</a>
+                <a href="#">Resources</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

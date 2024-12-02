@@ -21,79 +21,19 @@
         </nav>
     </header>
 
-    <!-- Main Survey Page -->
     <div id="survey-page">
-        <!-- Step 1: Email Input -->
-        <div id="email-step">
-            <h1>Welcome to the Fashion Survey</h1>
-            <p>Please enter your email to begin:</p>
-            <form id="email-form">
+        <form id="survey-form">
+            <div id="email-step">
+                <h1>Welcome to the Fashion Survey</h1>
+                <p>Please enter your email to begin:</p>
                 <input type="email" id="email" placeholder="Enter your email" required>
-                <button type="submit">Start Survey</button>
-            </form>
-            <p id="error-message" style="color: red; display: none;">Please enter a valid email address.</p>
-        </div>
-
-        <!-- Step 2: Age Selection -->
-        <div id="age-step" style="display: none;">
-            <h1>Select Your Age Range</h1>
-            <form id="age-form">
-                <div class="options-grid">
-                    <label><input type="radio" name="age" value="15-20" required> 15-20</label>
-                    <label><input type="radio" name="age" value="21-25"> 21-25</label>
-                    <label><input type="radio" name="age" value="26-30"> 26-30</label>
-                    <label><input type="radio" name="age" value="31-37"> 31-37</label>
-                    <label><input type="radio" name="age" value="38-45"> 38-45</label>
-                    <label><input type="radio" name="age" value="45-60"> 45-60</label>
-                    <label><input type="radio" name="age" value="60+"> 60+</label>
-                </div>
-                <div class="button-group">
-                    <button type="button" class="back-btn" id="back-to-email">Back</button>
-                    <button type="submit" class="next-btn">Next</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Step 3: Gender Selection -->
-        <div id="gender-step" style="display: none;">
-            <h1>Select Your Gender</h1>
-            <form id="gender-form">
-                <div class="options-row">
-                    <label><input type="radio" name="gender" value="Male" required> Male</label>
-                    <label><input type="radio" name="gender" value="Female"> Female</label>
-                </div>
-                <div class="button-group">
-                    <button type="button" class="back-btn" id="back-to-age">Back</button>
-                    <button type="submit" class="next-btn">Next</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Step 4: Fashion Preferences -->
-        <div id="fashion-step" style="display: none;">
-            <h1>Select Your Preferred Fashion Styles</h1>
-            <form id="fashion-form">
-                <div class="fashion-grid">
-                    <label><input type="checkbox" name="fashion" value="Streetwear"> Streetwear</label>
-                    <label><input type="checkbox" name="fashion" value="Classic"> Classic</label>
-                    <label><input type="checkbox" name="fashion" value="Chic"> Chic</label>
-                    <label><input type="checkbox" name="fashion" value="Athletic"> Athletic</label>
-                    <label><input type="checkbox" name="fashion" value="Vintage"> Vintage</label>
-                    <label><input type="checkbox" name="fashion" value="Glamorous"> Glamorous</label>
-                </div>
-                <div class="button-group">
-                    <button type="button" class="back-btn" id="back-to-gender">Back</button>
-                    <button type="submit" class="next-btn">Next</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Recommendation Step -->
-        <div id="recommendation-step" style="display: none;">
-            <h1>Recommendations</h1>
-            <div id="recommendations"></div>
-            <button class="finish-btn" onclick="window.location.href='{{ url_for('home') }}'">Finish</button>
-        </div>
+                <button type="button" id="emaail-btn">Start Survey</button>
+                <p id="error-message" style="color: red; display: none;">Please enter a valid email address.</p>
+            </div>
+            <div id="age-step" style="display: none;">
+                
+            </div>
+        </form>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>

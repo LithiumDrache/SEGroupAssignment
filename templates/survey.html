@@ -30,8 +30,25 @@
                 <button type="button" id="emaail-btn">Start Survey</button>
                 <p id="error-message" style="color: red; display: none;">Please enter a valid email address.</p>
             </div>
-            <div id="age-step" style="display: none;">
-                
+            <div id="gender-step" style="display: none;">
+                <p>Please select your gender:</p>
+                <input type="text" id="gender" required>
+                <button type="button" id="female-btn">Female</button>
+                <button type="button" id="male-btn">Male</button>
+                <button type="button" id="gn-btn">Gender Neutral</button>
+                <p id="error-message" style="color: red; display: none;">Please select a gender.</p>
+            </div>
+            <div id="location-step" style="display: none;">
+                <p>Please select your location:</p>
+                <select id="country" name="country" required>
+                    <option value="" disabled selected>Select your country</option>
+                </select>
+                <p id="error-message" style="color: red; display: none;">Please select a country.</p>
+            </div>
+            <div id="genre-step" style="display: none">
+                <p>Please enter a genre of clothing you want to wear:</p>
+                <input type="text" id="genre" placeholder="Enter a genre">
+                <p id="error-message" style="color: red; display: none;">Please enter a genre.</p>
             </div>
         </form>
     </div>
@@ -42,8 +59,10 @@
 
     <!-- document.addEventListener('DOMContentLoaded', () => {
         const emailStep = document.getElementById('email-step');
-        const ageStep = document.getElementById('age-step');
         const genderStep = document.getElementById('gender-step');
+        const locationStep = document.getElementById('')
+
+
         const fashionStep = document.getElementById('fashion-step');
         const recommendationStep = document.getElementById('recommendation-step');
         const recommendationsDiv = document.getElementById('recommendations');

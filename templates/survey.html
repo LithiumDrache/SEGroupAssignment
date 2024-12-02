@@ -42,9 +42,12 @@
                 <p>Please select your location:</p>
                 <select id="country" name="country" required>
                     <option value="" disabled selected>Select your country</option>
+                    {% for country in countries %}
+                        <option value="{{ country }}">{{ country }}</option>
+                    {% endfor %}
                 </select>
                 <p id="error-message" style="color: red; display: none;">Please select a country.</p>
-            </div>
+            </div>            
             <div id="genre-step" style="display: none">
                 <p>Please enter a genre of clothing you want to wear:</p>
                 <input type="text" id="genre" placeholder="Enter a genre">

@@ -2,9 +2,9 @@ from flask import Flask, request, render_template
 from pyngrok import ngrok
 from dotenv import load_dotenv
 import os
-import json
 import requests
 import time
+import pycountry
 
 # Load environment variables from .env file
 load_dotenv()
@@ -27,9 +27,11 @@ ngrok.set_auth_token(NGROK_TOKEN)
 
 # API headers and endpoints
 HEADERS = {
-    "Authorization": f"Bearer {AI_TOKEN}"  # Use AI_TOKEN here
+    "Authorization": f"Bearer {AI_TOKEN}"
 }
 INITIAL_URL = "https://api.edenai.run/v2/workflow/bda09f54-49b2-4f5f-a3bc-9b2fa4f66c2f/execution/"
+
+countries = sorted([country.name for country in pycountry.countries])  # Fetch countries using pycountry
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -79,7 +81,8 @@ def about():
 
 @app.route('/survey', methods=["GET", "POST"])
 def survey():
-    return render_template("survey.html")
+    # Use the preloaded countries list
+    return render_template("survey.html", countries=countries)
 
 # Run Flask app with ngrok
 if __name__ == "__main__":

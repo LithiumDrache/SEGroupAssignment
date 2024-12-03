@@ -363,3 +363,57 @@ label span {
     transform: scale(1.05);
     background-color: #cce5e0;
 }
+
+
+/* Result Page Styling */
+#result-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-size: 1em;
+    line-height: 1.8;
+    color: #333;
+    word-wrap: break-word; /* Ensures long words or code snippets wrap properly */
+}
+
+#result-container .code-block {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow-x: auto;
+    white-space: pre-wrap; /* Preserves formatting while wrapping */
+    font-family: 'Courier New', Courier, monospace;
+    margin: 10px 0;
+}
+
+.result-back-link {
+    display: inline-block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #004c4c;
+    border: 2px solid #00bfa6;
+    border-radius: 5px;
+    background-color: white;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+
+.result-back-link:hover {
+    color: white;
+    background-color: #00bfa6;
+    transform: scale(1.05);
+}
+
+#result-header {
+    font-size: 2.5em;
+    color: #004c4c;
+    text-align: center;
+    margin-bottom: 20px;
+}

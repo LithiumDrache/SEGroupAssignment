@@ -23,11 +23,18 @@
 
     <!-- Main Survey Page -->
     <div id="survey-page">
+<<<<<<< Updated upstream
         <!-- Step 1: Email Input -->
         <div id="email-step">
             <h1>Welcome to the Fashion Survey</h1>
             <p>Please enter your email to begin:</p>
             <form id="email-form">
+=======
+        <form id="survey-form" action="{{ url_for('result') }}" method="POST">
+            <div id="email-step">
+                <h1>Welcome to the Fashion Survey</h1>
+                <p>Please enter your email to begin:</p>
+>>>>>>> Stashed changes
                 <input type="email" id="email" placeholder="Enter your email" required>
                 <button type="submit">Start Survey</button>
             </form>

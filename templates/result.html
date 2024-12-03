@@ -6,10 +6,12 @@
     <title>Generated HTML</title>
 </head>
 <body>
-    <h1>Generated HTML Output</h1>
-    <div>
-        {{ html_code|safe }}
+    <div id="result-container">
+        <div id="result-header">Generated HTML Output</div>
+        <div id="generated-response">
+            <pre class="code-block">{{ html_code|safe }}</pre>
+        </div>
+        <a href="/" class="result-back-link">Back</a>
     </div>
-    <a href="/">Back</a>
 </body>
 </html>

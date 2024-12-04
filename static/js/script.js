@@ -1,70 +1,66 @@
-// Add click event to survey buttons
-document.querySelectorAll('.survey-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        alert('Redirecting to Survey...');
-        // Replace this alert with the actual survey URL or modal opening code
-    });
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     const emailStep = document.getElementById('email-step');
-    const ageStep = document.getElementById('age-step');
     const genderStep = document.getElementById('gender-step');
-    const emailForm = document.getElementById('email-form');
-    const ageForm = document.getElementById('age-form');
-    const genderForm = document.getElementById('gender-form');
-    const errorMessage = document.getElementById('error-message');
+    const locationStep = document.getElementById('location-step');
+    const genreStep = document.getElementById('genre-step');
 
-    // Store survey data
-    let surveyData = {};
+    const emailBtn = document.getElementById('email-btn');
+    const genderBtn = document.getElementById('gender-btn');
+    const locationBtn = document.getElementById('location-btn');
+    const surveyform = document.getElementById('survey-form');
 
-    // Handle Email Form Submission
-    emailForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
+    const emailError = document.getElementById('email-error-message');
+    const genderError = document.getElementById('gender-error-message');
+    const locationError = document.getElementById('location-error-message');
+    const genreError = document.getElementById('genre-error-message');
 
-        if (validateEmail(email)) {
-            errorMessage.style.display = 'none';
+    const surveyData = {};
+
+    emailBtn.addEventListener('click', () => {
+        const email = document.getElementById('email').value.trim();
+        if (email && /\S+@\S+\.\S+/.test(email)) {
             surveyData.email = email;
             emailStep.style.display = 'none';
-            ageStep.style.display = 'block'; // Show age step
+            genderStep.style.display = 'block';
         } else {
-            errorMessage.style.display = 'block';
+            emailError.style.display = 'block';
         }
     });
 
-    // Handle Age Form Submission
-    ageForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const selectedAge = document.querySelector('input[name="age"]:checked');
-
-        if (selectedAge) {
-            surveyData.age = selectedAge.value;
-            ageStep.style.display = 'none';
-            genderStep.style.display = 'block'; // Show gender step
-        } else {
-            alert("Please select an age range to proceed.");
-        }
-    });
-
-    // Handle Gender Form Submission
-    genderForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+    genderBtn.addEventListener('click', () => {
         const selectedGender = document.querySelector('input[name="gender"]:checked');
 
         if (selectedGender) {
             surveyData.gender = selectedGender.value;
-            console.log("Survey Data:", surveyData); // Debugging
-            alert(`Gender "${selectedGender.value}" selected. Proceeding to the next step...`);
-            // Proceed to the next step (e.g., fashion preferences)
+
+            genderStep.style.display = 'none';
+            locationStep.style.display = 'block';
         } else {
-            alert("Please select a gender to proceed.");
+            genderError.style.display = 'block';
         }
     });
 
-    // Email Validation Function
-    function validateEmail(email) {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailPattern.test(email);
-    }
+    locationBtn.addEventListener('click', () => {
+        const country = document.getElementById('country').value;
+        if (country) {
+            surveyData.location = country;
+            locationStep.style.display = 'none';
+            genreStep.style.display = 'block';
+        } else {
+            locationError.style.display = 'block';
+        }
+    });
+
+    surveyForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const genre = document.getElementById('genre').value.trim();
+        if (genre) {
+            surveyData.genre = genre;
+            console.log('Survey Data:', surveyData);
+            alert('Survey submitted successfully!');
+            surveyForm.reset();
+        } else {
+            genreError.style.display = 'block';
+        }
+    });
 });

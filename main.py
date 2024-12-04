@@ -6,26 +6,26 @@ import requests
 import time
 import pycountry
 
-# Load environment variables from .env file
+# Load .env configuration
 load_dotenv()
 
 # Retrieve tokens from the .env file
 NGROK_TOKEN = os.getenv("NGROK_TOKEN")
 AI_TOKEN = os.getenv("AI_TOKEN")
 
-# Check if the tokens are loaded
+# Validate environment variables
 if not NGROK_TOKEN:
     raise ValueError("NGROK_TOKEN is not set. Please check your .env file.")
 if not AI_TOKEN:
     raise ValueError("AI_TOKEN is not set. Please check your .env file.")
 
-# Flask app initialization
+# Initialize Flask application
 app = Flask(__name__)
 
-# Set up Ngrok with the NGROK_TOKEN
+# Configure Ngrok tunnel
 ngrok.set_auth_token(NGROK_TOKEN)
 
-# API headers and endpoints
+# Set API authentication and URL
 HEADERS = {
     "Authorization": f"Bearer {AI_TOKEN}"
 }
@@ -63,7 +63,7 @@ def result():
             execution_id = result["id"]
             status = result["content"]["status"]
 
-            # Polling for the result
+            # Poll the API for processing status
             max_retries = 15
             retries = 0
             while status in ["running", "queued"] and retries < max_retries:
@@ -86,7 +86,7 @@ def result():
         else:
             return render_template("result.html", html_code=f"Error: {response.status_code}, {response.text}")
 
-# Run Flask app with ngrok
+# Start Flask app with Ngrok integration
 if __name__ == "__main__":
     # Set up the Ngrok tunnel
     ngrok_tunnel = ngrok.connect(5000)

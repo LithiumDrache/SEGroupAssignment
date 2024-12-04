@@ -1,11 +1,31 @@
-Sets to setup the project:
+# Step 1: Create a virtual environment
+```
+python -m venv .venv
+```
 
-1. python -m venv .venv
+# Step 2: Activate the virtual environment
+# On Windows:
+```
+.venv\Scripts\activate
+```
+# On Mac/Linux:
+```
+source .venv/bin/activate
+```
 
-2. .venv\Scripts\activate
+# Step 3: Install dependencies
+```
+pip install -r requirements.txt
+```
 
-3. pip install -r requirements.txt
+# Step 4: Run the application
+```
+py main.py
+```
+# If the above doesn't work, try:
+```
+python main.py
+```
 
-4. py main.py
-
-5. Open public ngrok link on browser
+# Step 5: Access the application
+# Open the public Ngrok link provided in the terminal on your browser

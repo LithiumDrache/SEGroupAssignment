@@ -21,104 +21,162 @@
         </nav>
     </header>
 
-    <!-- Main Survey Page -->
     <div id="survey-page">
-<<<<<<< Updated upstream
-        <!-- Step 1: Email Input -->
-        <div id="email-step">
-            <h1>Welcome to the Fashion Survey</h1>
-            <p>Please enter your email to begin:</p>
-            <form id="email-form">
-=======
         <form id="survey-form" action="{{ url_for('result') }}" method="POST">
             <div id="email-step">
                 <h1>Welcome to the Fashion Survey</h1>
                 <p>Please enter your email to begin:</p>
->>>>>>> Stashed changes
                 <input type="email" id="email" placeholder="Enter your email" required>
-                <button type="submit">Start Survey</button>
-            </form>
-            <p id="error-message" style="color: red; display: none;">Please enter a valid email address.</p>
-        </div>
+                <button type="button" id="email-btn">Start Survey</button>
+                <p id="email-error-message" style="color: red; display: none;">Please enter a valid email address.</p>
+            </div>
 
-        <!-- Step 2: Age Selection -->
-        <div id="age-step" style="display: none;">
-            <h1>Select Your Age Range</h1>
-            <form id="age-form">
-                <div class="options-grid">
-                    <label><input type="radio" name="age" value="15-20" required> 15-20</label>
-                    <label><input type="radio" name="age" value="21-25"> 21-25</label>
-                    <label><input type="radio" name="age" value="26-30"> 26-30</label>
-                    <label><input type="radio" name="age" value="31-37"> 31-37</label>
-                    <label><input type="radio" name="age" value="38-45"> 38-45</label>
-                    <label><input type="radio" name="age" value="45-60"> 45-60</label>
-                    <label><input type="radio" name="age" value="60+"> 60+</label>
-                </div>
-                <div class="button-group">
-                    <button type="button" class="back-btn" id="back-to-email">Back</button>
-                    <button type="submit" class="next-btn">Next</button>
-                </div>
-            </form>
-        </div>
+            <div id="gender-step" style="display: none;">
+                <p>Please select your gender:</p>
+                <label>
+                    <input type="radio" name="gender" value="Female"> Female
+                </label>
+                <label>
+                    <input type="radio" name="gender" value="Male"> Male
+                </label>
+                <label>
+                    <input type="radio" name="gender" value="Gender Neutral"> Gender Neutral
+                </label>
+                <br>
+                <button type="button" id="gender-btn">Next</button>
+                <p id="gender-error-message" style="color: red; display: none;">Please select a gender.</p>
+            </div>            
 
-        <!-- Step 3: Gender Selection -->
-        <div id="gender-step" style="display: none;">
-            <h1>Select Your Gender</h1>
-            <form id="gender-form">
-                <div class="options-row">
-                    <label><input type="radio" name="gender" value="Male" required> Male</label>
-                    <label><input type="radio" name="gender" value="Female"> Female</label>
-                </div>
-                <div class="button-group">
-                    <button type="button" class="back-btn" id="back-to-age">Back</button>
-                    <button type="submit" class="next-btn">Next</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Step 4: Fashion Preferences -->
-        <div id="fashion-step" style="display: none;">
-            <h1>Select Your Preferred Fashion Styles</h1>
-            <form id="fashion-form">
-                <div class="fashion-grid">
-                    <label><input type="checkbox" name="fashion" value="Streetwear"> Streetwear</label>
-                    <label><input type="checkbox" name="fashion" value="Classic"> Classic</label>
-                    <label><input type="checkbox" name="fashion" value="Chic"> Chic</label>
-                    <label><input type="checkbox" name="fashion" value="Athletic"> Athletic</label>
-                    <label><input type="checkbox" name="fashion" value="Vintage"> Vintage</label>
-                    <label><input type="checkbox" name="fashion" value="Glamorous"> Glamorous</label>
-                </div>
-                <div class="button-group">
-                    <button type="button" class="back-btn" id="back-to-gender">Back</button>
-                    <button type="submit" class="next-btn">Next</button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Recommendation Step -->
-        <div id="recommendation-step" style="display: none;">
-            <h1>Recommendations</h1>
-            <div id="recommendations"></div>
-            <button class="finish-btn" onclick="window.location.href='{{ url_for('home') }}'">Finish</button>
-        </div>
+            <div id="location-step" style="display: none;">
+                <p>Please select your location:</p>
+                <select id="country" name="country" required>
+                    <option value="" disabled selected>Select your country</option>
+                    {% for country in countries %}
+                        <option value="{{ country }}">{{ country }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" id="location-btn">Next</button>
+                <p id="error-message" style="color: red; display: none;">Please select a country.</p>
+            </div>            
+            <div id="genre-step" style="display: none">
+                <p>Please enter a genre of clothing you want to wear:</p>
+                <input type="text" id="genre" placeholder="Enter a genre" required>
+                <button type="sumbit" id="genre-btn">Submit</button>
+                <p id="error-message" style="color: red; display: none;">Please enter a genre.</p>
+            </div>
+        </form>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     //RANDOM JS
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emailStep = document.getElementById('email-step');
+            const genderStep = document.getElementById('gender-step');
+            const locationStep = document.getElementById('location-step');
+            const genreStep = document.getElementById('genre-step');
+
+            const emailBtn = document.getElementById('email-btn');
+            const genderBtn = document.getElementById('gender-btn');
+            const locationBtn = document.getElementById('location-btn');
+            const surveyform = document.getElementById('survey-form');
+
+            const emailError = document.getElementById('email-error-message');
+            const genderError = document.getElementById('gender-error-message');
+            const locationError = document.getElementById('location-error-message');
+            const genreError = document.getElementById('genre-error-message');
+
+            const surveyData = {};
+
+            emailBtn.addEventListener('click', () => {
+                const email = document.getElementById('email').value.trim();
+                if (email && /\S+@\S+\.\S+/.test(email)) {
+                    surveyData.email = email;
+                    emailStep.style.display = 'none';
+                    genderStep.style.display = 'block';
+                } else {
+                    emailError.style.display = 'block';
+                }
+            });
+
+            genderBtn.addEventListener('click', () => {
+                const selectedGender = document.querySelector('input[name="gender"]:checked');
+
+                if (selectedGender) {
+                    surveyData.gender = selectedGender.value;
+
+                    genderStep.style.display = 'none';
+                    locationStep.style.display = 'block';
+                } else {
+                    genderError.style.display = 'block';
+                }
+            });
+
+            locationBtn.addEventListener('click', () => {
+                const country = document.getElementById('country').value;
+                if (country) {
+                    surveyData.location = country;
+                    locationStep.style.display = 'none';
+                    genreStep.style.display = 'block';
+                } else {
+                    locationError.style.display = 'block';
+                }
+            });
+
+            surveyForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const genre = document.getElementById('genre').value.trim();
+                if (genre) {
+                    surveyData.genre = genre;
+                    console.log('Survey Data:', surveyData);
+                    alert('Survey submitted successfully!');
+                    surveyForm.reset();
+                } else {
+                    genreError.style.display = 'block';
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+
 
     <!-- document.addEventListener('DOMContentLoaded', () => {
+        
+
         const emailStep = document.getElementById('email-step');
-        const ageStep = document.getElementById('age-step');
         const genderStep = document.getElementById('gender-step');
+        const locationStep = document.getElementById('location-step');
+        const genreStep = document.getElementById('genre-step');
+
+        // Email form submission
+        emailForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.querySelector('#email').value;
+            surveyData.email = email;
+            emailStep.style.display = 'none';
+            ageStep.style.display = 'block';
+        });
+
+        // Gender form submission
+        genderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+            surveyData.gender = gender;
+            genderStep.style.display = 'none';
+            fashionStep.style.display = 'block';
+        });
+
+
+
         const fashionStep = document.getElementById('fashion-step');
         const recommendationStep = document.getElementById('recommendation-step');
         const recommendationsDiv = document.getElementById('recommendations');
-    
-        const emailForm = document.getElementById('email-form');
-        const ageForm = document.getElementById('age-form');
-        const genderForm = document.getElementById('gender-form');
-        const fashionForm = document.getElementById('fashion-form');
     
         let surveyData = {};
     
@@ -154,14 +212,6 @@
             },
         };
     
-        // Email form submission
-        emailForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.querySelector('#email').value;
-            surveyData.email = email;
-            emailStep.style.display = 'none';
-            ageStep.style.display = 'block';
-        });
     
         // Age form submission
         ageForm.addEventListener('submit', (e) => {
@@ -170,15 +220,6 @@
             surveyData.age = age;
             ageStep.style.display = 'none';
             genderStep.style.display = 'block';
-        });
-    
-        // Gender form submission
-        genderForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const gender = document.querySelector('input[name="gender"]:checked').value;
-            surveyData.gender = gender;
-            genderStep.style.display = 'none';
-            fashionStep.style.display = 'block';
         });
     
         // Fashion form submission

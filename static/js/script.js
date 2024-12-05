@@ -57,10 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (genre) {
             surveyData.genre = genre;
             console.log('Survey Data:', surveyData);
-            alert('Survey submitted successfully!');
-            surveyForm.reset();
         } else {
             genreError.style.display = 'block';
         }
     });
+
+
+
 });

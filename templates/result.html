@@ -7,12 +7,45 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <!-- Topbar -->
+    <header>
+        <div class="logo">
+            <a href="{{ url_for('home') }}"><img src="{{ url_for('static', filename='images/logo.JPG') }}" alt="Fashy Logo"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
+                <li><a href="{{ url_for('survey') }}">Survey</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div id="result-container">
         <div id="result-header">Generated HTML Output</div>
-        <div id="generated-response">
-            <pre class="code-block">{{ html_code|safe }}</pre>
+        <div id="images-container">
+            <div class="item-image clicked">
+                <img src="{{ url_for('static', filename='images/tshirt.png') }}" alt="T-shirt">
+            </div>
+            <div class="item-image">
+                <img src="{{ url_for('static', filename='images/trousers.png') }}" alt="Trousers">
+            </div>
+            <div class="item-image">
+                <img src="{{ url_for('static', filename='images/shoes.png') }}" alt="Shoes">
+            </div>
+            <div class="item-image">
+                <img src="{{ url_for('static', filename='images/glasses.png') }}" alt="Glasses">
+            </div>
         </div>
+        <div id="generated-response">
+            {{ html_code|safe }}
+        </div>        
         <a href="/" class="result-back-link">Back</a>
     </div>
+
+    <script src="{{ url_for('static', filename='js/result.js') }}"></script>
+
 </body>
 </html>
+
+
